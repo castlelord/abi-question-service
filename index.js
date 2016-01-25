@@ -14,7 +14,7 @@ app.get("/search",query_creater,db_search,end);
 
 function query_creater(req,res,next){
   console.log(req.query.subject);
-  var search_query = 'SELECT column FROM ' + req.query.subject + 'ORDER BY RANDOM() LIMIT 1';
+  var search_query = 'SELECT frage, antwort, falsch_1, falsch_2, falsch_3 FROM ' + req.query.subject + ' ORDER BY RANDOM() LIMIT 1';
   next(search_query);
 }
 
