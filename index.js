@@ -12,14 +12,21 @@ app.use(bodyParser.json());
 
 app.get("/search",query_creater,db_search,end);
 
+// Creates a query and gives it to db_search
+
 function query_creater(req,res,next){
   var search_query = 'SELECT frage, antwort, falsch_1, falsch_2, falsch_3 FROM ' + req.query.subject + ' ORDER BY RANDOM() LIMIT 1';
   next(search_query);
 }
 
+// Ends response
+
 function end(req,res){
   res.end;
 }
+
+/* Executes a query in the DB and sends the first
+   returned row as a JSON response */
 
 function db_search(qry,req,res,next){
   pg.connect(conString, function(err, client, done) {
