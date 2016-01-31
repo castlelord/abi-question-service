@@ -15,7 +15,7 @@ app.get("/search",query_creater,db_search,end);
 // Creates a query and gives it to db_search
 
 function query_creater(req,res,next){
-  var search_query = 'SELECT frage, antwort, falsch_1, falsch_2, falsch_3 FROM ' + req.query.subject + ' ORDER BY RANDOM() LIMIT 1';
+  var search_query = 'SELECT frage, antwort, falsch_1, falsch_2, falsch_3 FROM ' + req.query.subject + ' WHERE kategorie=' + req.query.kategorie + ' ORDER BY RANDOM() LIMIT 1';
   next(search_query);
 }
 
