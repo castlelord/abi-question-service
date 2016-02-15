@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var port = process.env.PORT || 3000;
+//var router = express.Router();
 var server = app.listen(port);
 
 var bodyParser = require("body-parser");
@@ -21,6 +22,7 @@ function query_creater(req,res,next){
 
 // Ends response
 
+
 function end(req,res){
   res.end;
 }
@@ -38,9 +40,20 @@ function db_search(qry,req,res,next){
       if(err) {
         return console.error('error running query', err);
       }
+      console.log(result.rows[0]);
 
-      res.json(result.rows[0]);
+      switch (req.path) {
+
+        case "/search":
+
+          res.json(result.rows[0]);
+          next();
+          break;
+
+        default:
+
+          next(result.rows[0]);
+      }
     });
   });
-  next();
 }
