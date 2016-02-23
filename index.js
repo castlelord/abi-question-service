@@ -53,7 +53,6 @@ function set_id () {
     var fake_res = {"id" : -1};
     db_search(table_size_query,fake_req,fake_res,function(req,res){
         id[req.i].id = res.id;
-        console.log(res.id);
       }
     );
   }
@@ -73,34 +72,19 @@ function search_query_creater(req,res,next){
   next(search_query);
 }
 
-/*function table_size_query_creater(req,res,next){
-  var table_size_query = "SELECT MAX(id) FROM " + req.body.subject;
-  console.log("1: " + table_size_query);
-  console.log("");
-  console.log("");
-  console.log("");
-  next(table_size_query);
-}*/
-
 function new_question_query_creater(req,res,next){
   var curent_id;
-  console.log(id.length);
-  for(var i = 0; i <= id.length; i++){
-    console.log(i);
+  for(var i = 0; i <= id.length-1; i++){
     if(id[i].name == req.body.subject){
       id[i].id++;
       curent_id = id[i].id;
-      console.log("worked");
     }
   }
-  //console.log("left loop");
-  //console.log("someting");
-  //var new_question_query = 'INSERT INTO ' + req.body.subject + '(id, frage, antwort, falsch_1, falsch_2, falsch_3, creater, kategorie) VALUES(' + curent_id + ', ';
-  //new_question_query = new_question_query + req.body.frage + ', ' + req.body.antwort + ', ' + req.body.falsch_1 + ', ' + req.body.falsch_2 + ', ' + req.body.falsch_3 + ', ' + req.body.creater + ', ' + req.body.kategorie + ')';
-  //console.log(new_question_query);
-  //console.log("someting");
-  //next();
-  //next(new_question_query);
+  //(id, frage, antwort, falsch_1, falsch_2, falsch_3, creater, kategorie)
+  var new_question_query = "INSERT INTO " + req.body.subject + "(id, frage, antwort, falsch_1, falsch_2, falsch_3, creater, kategorie) VALUES (" + curent_id + ", '";
+  new_question_query = new_question_query + req.body.frage + "', '" + req.body.antwort + "', '" + req.body.falsch_1 + "', '" + req.body.falsch_2 + "', '" + req.body.falsch_3 + "', '" + req.body.creater + "', " + req.body.kategorie + ")";
+  console.log(new_question_query);
+  next(new_question_query);
 }
 
 function end(req,res){
@@ -111,9 +95,7 @@ function end(req,res){
    returned row as a JSON response */
 
 function db_search(qry,req,res,next){
-  console.log("sommmmmmmmeting");
 
-  console.log(qry);
   pg.connect(conString, function connecter_function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -121,11 +103,9 @@ function db_search(qry,req,res,next){
     client.query(qry,function result_switch(err, result) {
       done();
       if(err) {
-        return console.error('error running query', err,qry);
+        return console.error('error running query', err, qry);
       }
       //console.log(result.rows[0]);
-      console.log("database query");
-      console.log(qry);
       switch (req.path) {
 
         case "/search":
@@ -135,7 +115,6 @@ function db_search(qry,req,res,next){
           break;
 
         case "/new-question":
-          console.log("somettttttttttting");
 
           next();
           break;
