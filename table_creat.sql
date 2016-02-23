@@ -108,7 +108,7 @@ CREATE TABLE biologie
   creater text,
   kategorie int
 );
-CREATE TABLE bildende-kunst
+CREATE TABLE bildendekunst
 (
   id int,
   frage text,
@@ -155,6 +155,6 @@ INSERT INTO erdkunde VALUES(0,'frage','antwort','falsch','falsch','falsch','jona
 INSERT INTO sport VALUES(0,'frage','antwort','falsch','falsch','falsch','jonathan burggraf',0);
 INSERT INTO physik VALUES(0,'frage','antwort','falsch','falsch','falsch','jonathan burggraf',0);
 INSERT INTO biologie VALUES(0,'frage','antwort','falsch','falsch','falsch','jonathan burggraf',0);
-INSERT INTO bildende-kunst VALUES(0,'frage','antwort','falsch','falsch','falsch','jonathan burggraf',0);
+INSERT INTO bildendekunst VALUES(0,'frage','antwort','falsch','falsch','falsch','jonathan burggraf',0);
 INSERT INTO gemeinschaftskunde VALUES(0,'frage','antwort','falsch','falsch','falsch','jonathan burggraf',0);
 INSERT INTO musik VALUES(0,'frage','antwort','falsch','falsch','falsch','jonathan burggraf',0);
