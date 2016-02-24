@@ -83,11 +83,11 @@ function new_question_query_creater(req,res,next){
   //(id, frage, antwort, falsch_1, falsch_2, falsch_3, creater, kategorie)
   var new_question_query = "INSERT INTO " + req.body.subject + "(id, frage, antwort, falsch_1, falsch_2, falsch_3, creater, kategorie) VALUES (" + curent_id + ", '";
   new_question_query = new_question_query + req.body.frage + "', '" + req.body.antwort + "', '" + req.body.falsch_1 + "', '" + req.body.falsch_2 + "', '" + req.body.falsch_3 + "', '" + req.body.creater + "', " + req.body.kategorie + ")";
-  console.log(new_question_query);
   next(new_question_query);
 }
 
 function end(req,res){
+  //res.sendStatus(200);
   res.end;
 }
 
@@ -115,7 +115,7 @@ function db_search(qry,req,res,next){
           break;
 
         case "/new-question":
-
+          res.sendStatus(200);
           next();
           break;
 
