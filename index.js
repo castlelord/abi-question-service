@@ -105,7 +105,6 @@ function db_search(qry,req,res,next){
       if(err) {
         return console.error('error running query', err, qry);
       }
-      //console.log(result.rows[0]);
       switch (req.path) {
 
         case "/search":
